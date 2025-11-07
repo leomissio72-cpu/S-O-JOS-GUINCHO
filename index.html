@@ -6,58 +6,63 @@
   <title>SÃO JOSÉ GUINCHO</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
       margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f4f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    form {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
       width: 100%;
       max-width: 400px;
-      margin-top: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    input, select, button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
     }
 
     h2 {
       text-align: center;
-      color: #000;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+      color: #555;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
     }
 
     button {
-      background: #007bff;
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #007bff;
       color: white;
       border: none;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 25px;
     }
 
-    button:hover { background: #0056b3; }
+    button:hover {
+      background-color: #0056b3;
+    }
 
     #parcelasContainer {
       display: none;
@@ -65,61 +70,63 @@
   </style>
 </head>
 <body>
-  <form id="form">
-    <h2>SÃO JOSÉ GUINCHO</h2>
+  <div class="container">
+    <form id="form">
+      <h2>SÃO JOSÉ GUINCHO</h2>
 
-    <label>Nome do Destino:</label>
-    <input type="text" name="Nome do destino" required>
+      <label>Nome do Destino:</label>
+      <input type="text" name="Nome do destino" required>
 
-    <label>Nome do Cliente:</label>
-    <input type="text" name="Nome do Cliente" required>
+      <label>Nome do Cliente:</label>
+      <input type="text" name="Nome do Cliente" required>
 
-    <label>KM RODADO:</label>
-    <input type="number" name="KM RODADO" required>
+      <label>KM RODADO:</label>
+      <input type="number" name="KM RODADO" required>
 
-    <label>Gasto em combustível:</label>
-    <input type="number" name="Gasto em comb" required>
+      <label>Gasto em combustível:</label>
+      <input type="number" name="Gasto em comb" required>
 
-    <label>Valor Cobrado:</label>
-    <input type="number" name="Valor Cobrado" required>
+      <label>Valor Cobrado:</label>
+      <input type="number" name="Valor Cobrado" required>
 
-    <label>Método de Pagamento:</label>
-    <select name="Método de Pagamento" id="metodoPagamento" required>
-      <option value="">Selecione</option>
-      <option value="Pix">Pix</option>
-      <option value="Débito">Débito</option>
-      <option value="Crédito">Crédito</option>
-    </select>
-
-    <div id="parcelasContainer">
-      <label>Quantidade de Parcelas:</label>
-      <select name="Método de Paga Vezes" id="parcelas">
+      <label>Método de Pagamento:</label>
+      <select name="Método de Pagamento" id="metodoPagamento" required>
         <option value="">Selecione</option>
-        <option value="1x">1x</option>
-        <option value="2x">2x</option>
-        <option value="3x">3x</option>
-        <option value="4x">4x</option>
-        <option value="5x">5x</option>
-        <option value="6x">6x</option>
-        <option value="7x">7x</option>
-        <option value="8x">8x</option>
-        <option value="9x">9x</option>
-        <option value="10x">10x</option>
-        <option value="11x">11x</option>
-        <option value="12x">12x</option>
+        <option value="Pix">Pix</option>
+        <option value="Débito">Débito</option>
+        <option value="Crédito">Crédito</option>
       </select>
-    </div>
 
-    <label>Guinchada:</label>
-    <select name="Guinchada" required>
-      <option value="">Selecione</option>
-      <option>Carro</option>
-      <option>Moto</option>
-      <option>Máquina</option>
-    </select>
+      <div id="parcelasContainer">
+        <label>Quantidade de Parcelas:</label>
+        <select name="Método de Paga Vezes" id="parcelas">
+          <option value="">Selecione</option>
+          <option value="1x">1x</option>
+          <option value="2x">2x</option>
+          <option value="3x">3x</option>
+          <option value="4x">4x</option>
+          <option value="5x">5x</option>
+          <option value="6x">6x</option>
+          <option value="7x">7x</option>
+          <option value="8x">8x</option>
+          <option value="9x">9x</option>
+          <option value="10x">10x</option>
+          <option value="11x">11x</option>
+          <option value="12x">12x</option>
+        </select>
+      </div>
 
-    <button type="submit">Enviar</button>
-  </form>
+      <label>Guinchada:</label>
+      <select name="Guinchada" required>
+        <option value="">Selecione</option>
+        <option>Carro</option>
+        <option>Moto</option>
+        <option>Máquina</option>
+      </select>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbzSsLd5S_jhrD39b-1YMRutKjcPkiOBTNJIEYYCYJ2EzmUZRFPsUzRd107tc9ftCYdxdQ/exec";
