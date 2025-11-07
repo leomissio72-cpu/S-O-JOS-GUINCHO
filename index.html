@@ -59,25 +59,8 @@
 
     button:hover { background: #0056b3; }
 
-    #respostas {
-      margin-top: 40px;
-      width: 100%;
-      max-width: 600px;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    #respostas h3 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-
-    #lista-respostas li {
-      margin-bottom: 10px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 5px;
+    #parcelasContainer {
+      display: none;
     }
   </style>
 </head>
@@ -86,58 +69,49 @@
     <h2>SÃO JOSÉ GUINCHO</h2>
 
     <label>Nome do Destino:</label>
-    <input type="text" name="Nome do Destino" required>
+    <input type="text" name="Nome do destino" required>
 
     <label>Nome do Cliente:</label>
     <input type="text" name="Nome do Cliente" required>
 
     <label>KM RODADO:</label>
-    <input type="number" name="cpfPaciente" required>
+    <input type="number" name="KM RODADO" required>
 
     <label>Gasto em combustível:</label>
-    <input type="number" name="Gasto em combustível" required>
+    <input type="number" name="Gasto em comb" required>
 
-    </select>
     <label>Valor Cobrado:</label>
     <input type="number" name="Valor Cobrado" required>
 
-
-    
     <label>Método de Pagamento:</label>
-    <select name="Método de Pagamento" required>
+    <select name="Método de Pagamento" id="metodoPagamento" required>
       <option value="">Selecione</option>
-      <option>Pix</option>
-      <option>Débito</option>
-      <option>Crédito</option>
+      <option value="Pix">Pix</option>
+      <option value="Débito">Débito</option>
+      <option value="Crédito">Crédito</option>
+    </select>
 
+    <div id="parcelasContainer">
+      <label>Quantidade de Parcelas:</label>
+      <select name="Método de Paga Vezes" id="parcelas">
+        <option value="">Selecione</option>
+        <option value="1x">1x</option>
+        <option value="2x">2x</option>
+        <option value="3x">3x</option>
+        <option value="4x">4x</option>
+        <option value="5x">5x</option>
+        <option value="6x">6x</option>
+        <option value="7x">7x</option>
+        <option value="8x">8x</option>
+        <option value="9x">9x</option>
+        <option value="10x">10x</option>
+        <option value="11x">11x</option>
+        <option value="12x">12x</option>
+      </select>
+    </div>
 
-
-      
-<label>Método de Pagamento:</label>
-    <select name="Método de Pagamento" required>
-      <option value="">Selecione</option>
-      <option>1x</option>
-      <option>2x</option>
-      <option>3x</option>
-       <option>4x</option>
-      <option>5x</option>
-      <option>6x</option>
-       <option>7x</option>
-      <option>8x</option>
-      <option>9x</option>
-       <option>10x</option>
-      <option>11x</option>
-      <option>12x</option>
-
-
-
-
-
-      
-      
-    
     <label>Guinchada:</label>
-    <select name="Tipo de Guichada" required>
+    <select name="Guinchada" required>
       <option value="">Selecione</option>
       <option>Carro</option>
       <option>Moto</option>
@@ -147,17 +121,31 @@
     <button type="submit">Enviar</button>
   </form>
 
-  <div id="respostas">
-    <h3>Últimas respostas registradas:</h3>
-    <ul id="lista-respostas"></ul>
-  </div>
-
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzR5xrpQFv8iMELmPLVWk41ZdbGOj4bfBpjLrLhVKKTrrtu62NUM0qO23ubVE9wy4ktHg/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbzSsLd5S_jhrD39b-1YMRutKjcPkiOBTNJIEYYCYJ2EzmUZRFPsUzRd107tc9ftCYdxdQ/exec";
     const form = document.getElementById("form");
+    const metodoPagamento = document.getElementById("metodoPagamento");
+    const parcelasContainer = document.getElementById("parcelasContainer");
+    const parcelas = document.getElementById("parcelas");
+
+    metodoPagamento.addEventListener("change", () => {
+      if (metodoPagamento.value === "Crédito") {
+        parcelasContainer.style.display = "block";
+        parcelas.required = true;
+      } else {
+        parcelasContainer.style.display = "none";
+        parcelas.value = "";
+        parcelas.required = false;
+      }
+    });
+
+    let enviado = false;
 
     form.addEventListener("submit", e => {
       e.preventDefault();
+      if (enviado) return;
+      enviado = true;
+
       const formData = new FormData(form);
       formData.append("dataEnvio", new Date().toLocaleString("pt-BR"));
 
@@ -165,30 +153,14 @@
         .then(() => {
           alert("✅ Enviado com sucesso!");
           form.reset();
-          carregarRespostas(); // atualiza após envio
-        })
-        .catch(() => alert("❌ Erro ao enviar! Verifique a planilha e o script."));
-    });
-
-    function carregarRespostas() {
-      fetch(scriptURL)
-        .then(response => response.json())
-        .then(data => {
-          const lista = document.getElementById("lista-respostas");
-          lista.innerHTML = "";
-
-          data.slice(-5).reverse().forEach(item => {
-            const li = document.createElement("li");
-            li.textContent = `🧍 Cliente: ${item["Nome do Cliente"]} | 📍 Destino: ${item["Nome do Destino"]} | 💰 Valor: R$${item["Valor Cobrado"]} | 🚗 Tipo: ${item["Tipo de Guichada"]} | 📅 Data: ${item["dataEnvio"]}`;
-            lista.appendChild(li);
-          });
+          parcelasContainer.style.display = "none";
+          enviado = false;
         })
         .catch(() => {
-          document.getElementById("lista-respostas").innerHTML = "<li>Erro ao carregar respostas.</li>";
+          alert("❌ Erro ao enviar! Verifique a planilha e o script.");
+          enviado = false;
         });
-    }
-
-    window.onload = carregarRespostas;
+    });
   </script>
 </body>
 </html>
