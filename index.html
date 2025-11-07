@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SÃO JOSÉ GUINCHO</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #f2f4f7;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .container {
       background-color: #fff;
-      padding: 40px;
+      padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.05);
       width: 100%;
@@ -27,7 +27,7 @@
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       color: #333;
     }
 
@@ -44,8 +44,8 @@
       margin-top: 5px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      box-sizing: border-box;
       font-size: 14px;
+      box-sizing: border-box;
     }
 
     button {
@@ -75,22 +75,22 @@
       <h2>SÃO JOSÉ GUINCHO</h2>
 
       <label>Nome do Destino📍:</label>
-      <input type="text" name="nomeDestino" required>
+      <input type="text" name="Nome do Destino📍" required />
 
       <label>Nome do Cliente:</label>
-      <input type="text" name="nomeCliente" required>
+      <input type="text" name="Nome do Cliente" required />
 
       <label>KM RODADO🛣️:</label>
-      <input type="number" name="kmRodado" required>
+      <input type="number" name="KM RODADO🛣️" required />
 
       <label>Gastos:</label>
-      <input type="number" name="gastos" step="0.01" required>
+      <input type="number" name="Gastos" step="0.01" required />
 
       <label>Valor Cobrado 🤑:</label>
-      <input type="number" name="valorCobrado" step="0.01" required>
+      <input type="number" name="Valor Cobrado 🤑" step="0.01" required />
 
       <label>Método de Pagamento🫰:</label>
-      <select name="metodoPagamento" id="metodoPagamento" required>
+      <select name="Método de Pagamento🫰" id="metodoPagamento" required>
         <option value="">Selecione</option>
         <option value="Pix">Pix</option>
         <option value="Débito">Débito</option>
@@ -99,7 +99,7 @@
 
       <div id="parcelasContainer">
         <label>Quantidade de Parcelas:</label>
-        <select name="parcelas" id="parcelas">
+        <select name="Quantidade de Parcelas" id="parcelas">
           <option value="">Selecione</option>
           <option value="1x">1x</option>
           <option value="2x">2x</option>
@@ -117,7 +117,7 @@
       </div>
 
       <label>Guinchada🛻:</label>
-      <select name="guinchada" required>
+      <select name="Guinchada🛻" required>
         <option value="">Selecione</option>
         <option>Carro</option>
         <option>Moto</option>
@@ -136,14 +136,10 @@
     const parcelas = document.getElementById("parcelas");
 
     metodoPagamento.addEventListener("change", () => {
-      if (metodoPagamento.value === "Crédito") {
-        parcelasContainer.style.display = "block";
-        parcelas.required = true;
-      } else {
-        parcelasContainer.style.display = "none";
-        parcelas.value = "";
-        parcelas.required = false;
-      }
+      const isCredito = metodoPagamento.value === "Crédito";
+      parcelasContainer.style.display = isCredito ? "block" : "none";
+      parcelas.required = isCredito;
+      if (!isCredito) parcelas.value = "";
     });
 
     let enviado = false;
