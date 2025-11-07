@@ -46,6 +46,7 @@
       border-radius: 6px;
       font-size: 14px;
       box-sizing: border-box;
+      background-color: #e6f0ff; /* azul claro */
     }
 
     button {
@@ -80,7 +81,7 @@
       <label>Nome do Cliente:</label>
       <input type="text" name="Nome do Cliente" required />
 
-       <label>Gastos:</label>
+      <label>Gastos:</label>
       <input type="number" name="Gastos" step="0.01" required />
 
       <label>Valor Cobrado:</label>
@@ -113,13 +114,13 @@
         </select>
       </div>
 
-  <select name="Guinchada" required>
-  <option value="">Selecione</option>
-  <option>Carro</option>
-  <option>Moto</option>
-  <option>Máquina</option>
-  </select>
-
+      <label>Guinchada:</label>
+      <select name="Guinchada" required>
+        <option value="">Selecione</option>
+        <option>Carro</option>
+        <option>Moto</option>
+        <option>Máquina</option>
+      </select>
 
       <button type="submit">Enviar</button>
     </form>
@@ -163,6 +164,4 @@
     });
   </script>
 </body>
-</html>
-
 </html>
