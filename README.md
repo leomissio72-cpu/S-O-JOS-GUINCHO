@@ -1,1 +1,117 @@
-# S-O-JOS-GUINCHO
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SÃO JOSÉ GUINCHO</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #f8f9fa; 
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    form { 
+      background: white; 
+      padding: 30px; 
+      border-radius: 10px; 
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+
+    label { 
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, button { 
+      display: block;
+      width: 100%; 
+      padding: 10px; 
+      margin-top: 5px; 
+      border: 1px solid #ccc; 
+      border-radius: 5px; 
+      box-sizing: border-box;
+    }
+
+    h2 { 
+      text-align: center; 
+      color: #000; 
+      margin-bottom: 20px; 
+    }
+
+    button { 
+      background: #007bff; 
+      color: white; 
+      border: none; 
+      cursor: pointer; 
+      margin-top: 25px;
+    }
+
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <form id="form">
+    <h2>Formulário Médico</h2>
+
+    <label>Nome do Destino:</label>
+    <input type="text" name="Nome do Destino" required>
+
+    <label>Nome do Paciente:</label>
+    <input type="text" name="nomePaciente" required>
+
+    <label>KM RODADO:</label>
+    <input type="text" name="cpfPaciente" required>
+    
+ <label>Guinchada:</label>
+    <select name="Tipo de Guichada" required>
+      <option value="">Selecione</option>
+      <option>Carro</option>
+      <option>Moto</option>
+      <option>Máquina</option>
+    </select>
+ 
+
+    <label>Valor Cobrado:</label>
+    <select name="VALOR COBRADO" required>
+      <option value="">Selecione</option>
+      <option>R$160,00</option>
+      <option>R$320,00</option>
+    </select>
+
+    <label>Retorno Programado (em meses):</label>
+    <input type="number" name="retornoMeses" min="0" required>
+
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyIgkjaCiD6iuCHN1EAlXfMxu0uzP5pbLZZHNveY0v6twX-d3319NN5VRZiq4tb6LGn/exec";
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      formData.append("dataEnvio", new Date().toLocaleString("pt-BR"));
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(() => {
+          alert("✅ Enviado com sucesso!");
+          form.reset();
+        })
+        .catch(() => alert("❌ Erro ao enviar! Verifique a planilha e o script."));
+    });
+  </script>
+</body>
+</html>
+
