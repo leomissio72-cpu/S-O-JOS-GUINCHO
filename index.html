@@ -75,22 +75,22 @@
       <h2>SÃO JOSÉ GUINCHO</h2>
 
       <label>Nome do Destino📍:</label>
-      <input type="text" name="Nome do destino" required>
+      <input type="text" name="nomeDestino" required>
 
       <label>Nome do Cliente:</label>
-      <input type="text" name="Nome do Cliente" required>
+      <input type="text" name="nomeCliente" required>
 
       <label>KM RODADO🛣️:</label>
-      <input type="number" name="KM RODADO" required>
+      <input type="number" name="kmRodado" required>
 
       <label>Gastos:</label>
-      <input type="number" name="Gasto em comb" required>
+      <input type="number" name="gastos" step="0.01" required>
 
       <label>Valor Cobrado 🤑:</label>
-      <input type="number" name="Valor Cobrado" required>
+      <input type="number" name="valorCobrado" step="0.01" required>
 
       <label>Método de Pagamento🫰:</label>
-      <select name="Método de Pagamento" id="metodoPagamento" required>
+      <select name="metodoPagamento" id="metodoPagamento" required>
         <option value="">Selecione</option>
         <option value="Pix">Pix</option>
         <option value="Débito">Débito</option>
@@ -99,7 +99,7 @@
 
       <div id="parcelasContainer">
         <label>Quantidade de Parcelas:</label>
-        <select name="Método de Paga Vezes" id="parcelas">
+        <select name="parcelas" id="parcelas">
           <option value="">Selecione</option>
           <option value="1x">1x</option>
           <option value="2x">2x</option>
@@ -117,7 +117,7 @@
       </div>
 
       <label>Guinchada🛻:</label>
-      <select name="Guinchada" required>
+      <select name="guinchada" required>
         <option value="">Selecione</option>
         <option>Carro</option>
         <option>Moto</option>
@@ -129,7 +129,7 @@
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwYX1OHnk9dTZxx2WtnmyvDVsIjfLYlUAsIyDZUpjdy3Qk4KKqykDyzGilWLVsiX5Hmag/exec";
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwfjjco1rk3edusTV8NvcoCp-ljSL9YPli8ACPq9EoqlXaDiS4hxVE1Cko42KEV9Qe6vw/exec";
     const form = document.getElementById("form");
     const metodoPagamento = document.getElementById("metodoPagamento");
     const parcelasContainer = document.getElementById("parcelasContainer");
