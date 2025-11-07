@@ -62,15 +62,18 @@
 </head>
 <body>
   <form id="form">
-    <h2>Formulário Médico</h2>
+    <h2>SÃO JOSÉ GUINCHO </h2>
 
     <label>Nome do Destino:</label>
     <input type="text" name="Nome do Destino" required>
 
-    <label>Nome do Paciente:</label>
+    <label>Nome do Cliente:</label>
     <input type="text" name="nomePaciente" required>
 
     <label>KM RODADO:</label>
+    <input type="text" name="cpfPaciente" required>
+
+    <label>Valor Cobrado:</label>
     <input type="text" name="cpfPaciente" required>
     
  <label>Guinchada:</label>
@@ -81,16 +84,6 @@
       <option>Máquina</option>
     </select>
  
-
-    <label>Valor Cobrado:</label>
-    <select name="VALOR COBRADO" required>
-      <option value="">Selecione</option>
-      <option>R$160,00</option>
-      <option>R$320,00</option>
-    </select>
-
-    <label>Retorno Programado (em meses):</label>
-    <input type="number" name="retornoMeses" min="0" required>
 
     <button type="submit">Enviar</button>
   </form>
