@@ -5,64 +5,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SÃO JOSÉ GUINCHO</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      background: #f8f9fa; 
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
       display: flex;
       flex-direction: column;
-      align-items: center; 
+      align-items: center;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
       box-sizing: border-box;
     }
 
-    form { 
-      background: white; 
-      padding: 30px; 
-      border-radius: 10px; 
-      box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 400px;
       margin-top: 20px;
     }
 
-    label { 
+    label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
     }
 
-    input, select, button { 
+    input, select, button {
       display: block;
-      width: 100%; 
-      padding: 10px; 
-      margin-top: 5px; 
-      border: 1px solid #ccc; 
-      border-radius: 5px; 
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
       box-sizing: border-box;
     }
 
-    h2 { 
-      text-align: center; 
-      color: #000; 
-      margin-bottom: 20px; 
+    h2 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 20px;
     }
 
-    button { 
-      background: #007bff; 
-      color: white; 
-      border: none; 
-      cursor: pointer; 
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
       margin-top: 25px;
     }
 
     button:hover { background: #0056b3; }
+
+    #respostas {
+      margin-top: 40px;
+      width: 100%;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #respostas h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    #lista-respostas li {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
   </style>
 </head>
 <body>
   <form id="form">
-    <h2>SÃO JOSÉ GUINCHO </h2>
+    <h2>SÃO JOSÉ GUINCHO</h2>
 
     <label>Nome do Destino:</label>
     <input type="text" name="Nome do Destino" required>
@@ -78,18 +99,22 @@
 
     <label>Valor Cobrado:</label>
     <input type="number" name="Valor Cobrado" required>
-    
- <label>Guinchada:</label>
+
+    <label>Guinchada:</label>
     <select name="Tipo de Guichada" required>
       <option value="">Selecione</option>
       <option>Carro</option>
       <option>Moto</option>
       <option>Máquina</option>
     </select>
- 
 
     <button type="submit">Enviar</button>
   </form>
+
+  <div id="respostas">
+    <h3>Últimas respostas registradas:</h3>
+    <ul id="lista-respostas"></ul>
+  </div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbzSsLd5S_jhrD39b-1YMRutKjcPkiOBTNJIEYYCYJ2EzmUZRFPsUzRd107tc9ftCYdxdQ/exec";
@@ -104,10 +129,30 @@
         .then(() => {
           alert("✅ Enviado com sucesso!");
           form.reset();
+          carregarRespostas(); // atualiza após envio
         })
         .catch(() => alert("❌ Erro ao enviar! Verifique a planilha e o script."));
     });
+
+    function carregarRespostas() {
+      fetch(scriptURL)
+        .then(response => response.json())
+        .then(data => {
+          const lista = document.getElementById("lista-respostas");
+          lista.innerHTML = "";
+
+          data.slice(-5).reverse().forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = `🧍 Cliente: ${item["Nome do Cliente"]} | 📍 Destino: ${item["Nome do Destino"]} | 💰 Valor: R$${item["Valor Cobrado"]} | 🚗 Tipo: ${item["Tipo de Guichada"]} | 📅 Data: ${item["dataEnvio"]}`;
+            lista.appendChild(li);
+          });
+        })
+        .catch(() => {
+          document.getElementById("lista-respostas").innerHTML = "<li>Erro ao carregar respostas.</li>";
+        });
+    }
+
+    window.onload = carregarRespostas;
   </script>
 </body>
 </html>
-
